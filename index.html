@@ -638,9 +638,9 @@
                 
                 <div class="form-group">
                     <label>Santa, please bring me these gifts. </label>
-<label> I've been good this year!</label>
+<label>I've been good this year!</label>
                     <label>(fill the form with your keranjang kuning link no later than Dec 5)</label>
-                    <label>Range IDR 100k - 120k     :)</label>
+                    <label>Range IDR 100 - 120k     :)</label>
 
                     <div class="link-inputs">
                         <input type="text" id="link1" placeholder="🎁 Link Gift 1 (optional)">
@@ -685,7 +685,7 @@
                     <div class="action-buttons">
                         <button id="back-btn" class="btn btn-secondary">Back to Letter</button>
                         <button id="clear-data-btn" class="btn">Clear All Letters</button>
-                        <button id="download-excel-btn" class="btn">Download Excel</button>
+                        <button id="download-csv-btn" class="btn">Download CSV</button>
                     </div>
                 </div>
             </div>
@@ -722,7 +722,7 @@
         const adminParticipantList = document.getElementById('admin-participant-list');
         const backBtn = document.getElementById('back-btn');
         const clearDataBtn = document.getElementById('clear-data-btn');
-        const downloadExcelBtn = document.getElementById('download-excel-btn');
+        const downloadCsvBtn = document.getElementById('download-csv-btn');
         const notification = document.getElementById('notification');
         const snowContainer = document.getElementById('snow-container');
         const lightsContainer = document.getElementById('lights-container');
@@ -1168,27 +1168,32 @@
             }
         });
         
-        // Download data dalam format Excel
-        downloadExcelBtn.addEventListener('click', function() {
+        // Download data dalam format CSV
+        downloadCsvBtn.addEventListener('click', function() {
             if (participants.length === 0) {
                 showNotification('No data to download!', 'error');
                 return;
             }
             
             // Buat header untuk CSV
-            const headers = ['Name', 'Attendance', 'Gift Links', 'Timestamp'];
+            const headers = ['Name', 'Attendance', 'Gift Link 1', 'Gift Link 2', 'Gift Link 3', 'Timestamp'];
             
             // Buat data untuk CSV
-            const csvData = participants.map(participant => [
-                participant.name,
-                participant.attendance,
-                participant.links ? participant.links.join('; ') : '',
-                new Date(participant.timestamp).toLocaleString()
-            ]);
+            const csvData = participants.map(participant => {
+                const links = participant.links || [];
+                return [
+                    escapeCsvField(participant.name),
+                    escapeCsvField(participant.attendance),
+                    escapeCsvField(links[0] || ''),
+                    escapeCsvField(links[1] || ''),
+                    escapeCsvField(links[2] || ''),
+                    escapeCsvField(new Date(participant.timestamp).toLocaleString())
+                ];
+            });
             
             // Gabungkan header dan data
             const csvContent = [headers, ...csvData]
-                .map(row => row.map(field => `"${field}"`).join(','))
+                .map(row => row.join(','))
                 .join('\n');
             
             // Buat blob dan trigger download
@@ -1204,6 +1209,22 @@
             
             showNotification('Data downloaded as CSV!', 'success');
         });
+        
+        // Fungsi untuk escape field CSV (menangani koma dan kutip)
+        function escapeCsvField(field) {
+            if (field === null || field === undefined) {
+                return '""';
+            }
+            
+            const stringField = String(field);
+            
+            // Jika field mengandung koma, kutip, atau baris baru, wrap dengan kutip dan escape kutip ganda
+            if (stringField.includes(',') || stringField.includes('"') || stringField.includes('\n')) {
+                return '"' + stringField.replace(/"/g, '""') + '"';
+            }
+            
+            return stringField;
+        }
         
         // Inisialisasi efek visual
         createSnow();
