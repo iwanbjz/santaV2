@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dear Santa - Christmas Wish List</title>
+    <style>
+        /* Semua CSS sebelumnya tetap sama */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Mountains of Christmas', 'Christmas Script', 'North Pole', 'Snowburst One', cursive, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #e01b24 0%, #c1121f 100%);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            color: #fff;
+            font-size: 1em;
+            animation: fall linear forwards;
+            z-index: 1;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+        }
+        
+        @keyframes fall {
+            to {
+                transform: translateY(105vh);
+            }
+        }
+        
+        .christmas-light {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            animation: twinkle 2s infinite alternate;
+            z-index: 1;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+        }
+        
+        @keyframes twinkle {
+            0% { opacity: 0.2; }
+            100% { opacity: 1; }
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            margin: 20px 0;
+            position: relative;
+            z-index: 2;
+            border: 3px solid #ffcc00;
+        }
+        
+        .header {
+            background: linear-gradient(90deg, #32a852, #4caf50);
+            color: #fff;
+            padding: 120px 25px 25px 25px;
+            text-align: center;
+            position: relative;
+            border-bottom: 5px solid #ffcc00;
+            overflow: hidden;
+        }
+        
+        .header h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 5;
+            font-family: 'Mountains of Christmas', cursive;
+            font-weight: 700;
+        }
+        
+        .header p {
+            font-size: 18px;
+            opacity: 0.9;
+            position: relative;
+            z-index: 5;
+        }
+        
+        .santa-image {
+            position: absolute;
+            top: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 180px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 120"><path d="M50,10 C60,10 70,15 70,25 C70,35 60,40 50,40 C40,40 30,35 30,25 C30,15 40,10 50,10 Z" fill="%23f8c8dc"/><path d="M30,40 C30,60 50,80 50,80 C50,80 70,60 70,40 L30,40 Z" fill="%23e01b24"/><circle cx="40" cy="25" r="3" fill="%23000"/><circle cx="60" cy="25" r="3" fill="%23000"/><path d="M45,32 Q50,35 55,32" stroke="%23000" stroke-width="1.5" fill="none"/><path d="M50,10 C45,0 55,0 50,10 Z" fill="%23e01b24"/><path d="M20,15 C30,5 70,5 80,15 L80,25 C70,15 30,15 20,25 L20,15 Z" fill="%23e01b24"/><circle cx="50" cy="5" r="5" fill="%23fff"/><path d="M35,45 L40,55 L35,65 L40,75 L35,85 L40,95 L35,105 L65,105 L60,95 L65,85 L60,75 L65,65 L60,55 L65,45 Z" fill="%2332a852"/><path d="M50,45 L50,105" stroke="%23fff" stroke-width="2" fill="none"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            z-index: 10;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+            100% { transform: translateX(-50%) translateY(0); }
+        }
+        
+        .admin-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+            border: 2px solid white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: background 0.3s;
+            z-index: 15;
+        }
+        
+        .admin-btn:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+        
+        .christmas-tree {
+            position: absolute;
+            bottom: 10px;
+            left: 30px;
+            width: 60px;
+            height: 80px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 80"><path d="M30,5 L40,25 L20,25 Z" fill="%2332a852"/><path d="M30,20 L45,45 L15,45 Z" fill="%2332a852"/><path d="M30,40 L50,70 L10,70 Z" fill="%2332a852"/><rect x="25" y="70" width="10" height="10" fill="%238B4513"/><circle cx="25" cy="30" r="3" fill="%23FFD700"/><circle cx="40" cy="50" r="3" fill="%23FF0000"/><circle cx="20" cy="55" r="3" fill="%23FFD700"/><circle cx="35" cy="65" r="3" fill="%23FF0000"/><circle cx="45" cy="35" r="3" fill="%23FFD700"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+        
+        .gift-box {
+            position: absolute;
+            bottom: 15px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><rect x="5" y="10" width="40" height="30" fill="%23e01b24"/><rect x="5" y="10" width="40" height="10" fill="%2332a852"/><rect x="22" y="5" width="6" height="35" fill="%2332a852"/><rect x="5" y="10" width="40" height="5" fill="%23FFD700"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        .snowman {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 50px;
+            height: 70px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 70"><circle cx="25" cy="15" r="10" fill="%23fff"/><circle cx="25" cy="35" r="15" fill="%23fff"/><circle cx="25" cy="60" r="20" fill="%23fff"/><circle cx="22" cy="13" r="1.5" fill="%23000"/><circle cx="28" cy="13" r="1.5" fill="%23000"/><path d="M23,18 Q25,20 27,18" stroke="%23000" stroke-width="1" fill="none"/><path d="M15,35 L10,35" stroke="%23000" stroke-width="2" fill="none"/><path d="M35,35 L40,35" stroke="%23000" stroke-width="2" fill="none"/><rect x="23" y="5" width="4" height="8" fill="%23000"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+        
+        .reindeer {
+            position: absolute;
+            top: 30px;
+            right: 20px;
+            width: 60px;
+            height: 50px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 50"><path d="M30,10 C40,5 50,10 50,20 C50,30 40,35 30,30 C20,35 10,30 10,20 C10,10 20,5 30,10 Z" fill="%238B4513"/><circle cx="25" cy="15" r="3" fill="%23000"/><circle cx="35" cy="15" r="3" fill="%23000"/><path d="M30,20 Q32,25 30,30" stroke="%23000" stroke-width="1.5" fill="none"/><path d="M15,5 L20,10 L15,15" stroke="%238B4513" stroke-width="3" fill="none"/><path d="M45,5 L40,10 L45,15" stroke="%238B4513" stroke-width="3" fill="none"/><path d="M20,35 L15,45" stroke="%238B4513" stroke-width="3" fill="none"/><path d="M40,35 L45,45" stroke="%238B4513" stroke-width="3" fill="none"/><path d="M25,40 L20,50" stroke="%238B4513" stroke-width="3" fill="none"/><path d="M35,40 L40,50" stroke="%238B4513" stroke-width="3" fill="none"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+        
+        .header-lights {
+            position: absolute;
+            top: 10px;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            display: flex;
+            justify-content: space-around;
+        }
+        
+        .header-light {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            animation: light-twinkle 1.5s infinite alternate;
+        }
+        
+        @keyframes light-twinkle {
+            0% { opacity: 0.3; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        
+        .content {
+            padding: 25px;
+            color: #333;
+        }
+        
+        .form-section {
+            display: none;
+        }
+        
+        .active {
+            display: block;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #e01b24;
+            font-size: 18px;
+        }
+        
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #32a852;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border 0.3s;
+            background: rgba(255, 255, 255, 0.9);
+        }
+        
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-color: #e01b24;
+            outline: none;
+            box-shadow: 0 0 10px rgba(224, 27, 36, 0.5);
+        }
+        
+        .link-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .attendance-options {
+            margin-top: 15px;
+        }
+        
+        .attendance-label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #e01b24;
+            font-size: 18px;
+        }
+        
+        .attendance-checkboxes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .attendance-option {
+            display: flex;
+            align-items: center;
+            background: rgba(50, 168, 82, 0.1);
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: 2px solid #32a852;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .attendance-option:hover {
+            background: rgba(50, 168, 82, 0.2);
+        }
+        
+        .attendance-option.selected {
+            background: #32a852;
+            color: white;
+        }
+        
+        .attendance-option input {
+            margin-right: 8px;
+        }
+        
+        .btn {
+            background: linear-gradient(90deg, #e01b24, #ff4d4d);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: block;
+            margin: 20px auto 0;
+            box-shadow: 0 5px 15px rgba(224, 27, 36, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 20px rgba(224, 27, 36, 0.4);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn-secondary {
+            background: #32a852;
+        }
+        
+        .confirmation {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: rgba(224, 27, 36, 0.1);
+            border-radius: 8px;
+            border-left: 4px solid #32a852;
+        }
+        
+        .confirmation h3 {
+            color: #e01b24;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+        
+        .confirmation-item {
+            margin-bottom: 15px;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .confirmation-name {
+            font-weight: 600;
+            color: #e01b24;
+            font-size: 20px;
+        }
+        
+        .confirmation-attendance {
+            margin: 10px 0;
+            font-size: 16px;
+            color: #32a852;
+            font-weight: 600;
+        }
+        
+        .confirmation-links {
+            list-style-type: none;
+            margin-top: 10px;
+        }
+        
+        .confirmation-links li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .confirmation-links li:before {
+            content: "🎁";
+            position: absolute;
+            left: 0;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            transform: translateX(150%);
+            transition: transform 0.3s ease;
+            background: #e01b24;
+            border: 2px solid #ffcc00;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification.success {
+            background: #32a852;
+        }
+        
+        .notification.error {
+            background: #e01b24;
+        }
+        
+        .participant-list {
+            margin-top: 20px;
+        }
+        
+        .participant-item {
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #32a852;
+            color: #333;
+        }
+        
+        .participant-name {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #e01b24;
+            font-size: 20px;
+        }
+        
+        .participant-attendance {
+            margin: 5px 0;
+            color: #32a852;
+            font-weight: 600;
+        }
+        
+        .participant-links {
+            list-style-type: none;
+        }
+        
+        .participant-links li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .participant-links li:before {
+            content: "🎁";
+            position: absolute;
+            left: 0;
+        }
+        
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .wish-text {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #e01b24;
+            text-align: center;
+        }
+        
+        .merry-christmas {
+            text-align: center;
+            font-size: 24px;
+            color: #32a852;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        
+        .back-button {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+            border: 2px solid white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: background 0.3s;
+            z-index: 15;
+        }
+        
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Style untuk link */
+        .gift-link {
+            color: #e01b24;
+            text-decoration: none;
+            word-break: break-all;
+        }
+        
+        .gift-link:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                border-radius: 10px;
+            }
+            
+            .content {
+                padding: 15px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .header h1 {
+                font-size: 28px;
+            }
+            
+            .santa-image {
+                width: 120px;
+                height: 150px;
+                top: -50px;
+            }
+            
+            .header {
+                padding-top: 100px;
+            }
+            
+            .christmas-tree, .gift-box, .snowman, .reindeer {
+                transform: scale(0.8);
+            }
+            
+            .christmas-tree {
+                left: 10px;
+                bottom: 5px;
+            }
+            
+            .gift-box {
+                right: 10px;
+                bottom: 10px;
+            }
+            
+            .snowman {
+                left: 10px;
+                top: 15px;
+            }
+            
+            .reindeer {
+                right: 10px;
+                top: 25px;
+            }
+            
+            .attendance-checkboxes {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .attendance-option {
+                justify-content: center;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Efek salju -->
+    <div id="snow-container"></div>
+    
+    <!-- Lampu natal -->
+    <div id="lights-container"></div>
+    
+    <div class="container">
+        <div class="header">
+            <!-- Dekorasi Header -->
+            <div class="header-lights" id="header-lights"></div>
+            <div class="santa-image"></div>
+            <div class="christmas-tree"></div>
+            <div class="gift-box"></div>
+            <div class="snowman"></div>
+            <div class="reindeer"></div>
+            
+            <h1>Dear Santa 🎅</h1>
+            <p>Share your Christmas wish list with Santa!</p>
+            <button id="admin-btn" class="admin-btn">Elf Admin</button>
+        </div>
+        
+        <div class="content">
+            <!-- Form Input Section -->
+            <div id="form-section" class="form-section active">
+                <div class="form-group">
+                    <label for="name">Dear Santa, my name is...</label>
+                    <input type="text" id="name" placeholder="Enter your name here">
+                    
+                    <div class="attendance-options">
+                        <label class="attendance-label">I will come...</label>
+                        <div class="attendance-checkboxes">
+                            <label class="attendance-option" id="attendance-by myself">
+                                <input type="radio" name="attendance" value="by myself"> by myself
+                            </label>
+                            <label class="attendance-option" id="attendance-plus1">
+                                <input type="radio" name="attendance" value="+1"> +1
+                            </label>
+                            <label class="attendance-option" id="attendance-plus2">
+                                <input type="radio" name="attendance" value="+2"> +2
+                            </label>
+                            <label class="attendance-option" id="attendance-plus3">
+                                <input type="radio" name="attendance" value="+3"> +3
+                            </label>
+                            <label class="attendance-option" id="attendance-plusplus">
+                                <input type="radio" name="attendance" value="++++"> ++++
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Santa, please bring me these gifts. I've been good this year!</label>
+                    <label>(fill the form with your keranjang kuning link no later than Dec 5)</label>
+                    <label>Maksimal IDR 120k     :)</label>
+
+                    <div class="link-inputs">
+                        <input type="text" id="link1" placeholder="🎁 Gift 1 (optional)">
+                        <label>or</label>
+                        <input type="text" id="link2" placeholder="🎁 Gift 2 (optional)">
+                        <label>or</label>
+                        <input type="text" id="link3" placeholder="🎁 Gift 3 (optional)">
+                    </div>
+                </div>
+                
+                <button id="submit-btn" class="btn">Send My Letter to Santa 🎄</button>
+                
+                <div id="confirmation" class="confirmation hidden">
+                    <h3>Check Your Letter to Santa</h3>
+                    <p>Please review your letter before sending to the North Pole:</p>
+                    <div id="confirmation-data"></div>
+                    <div class="action-buttons">
+                        <button id="edit-btn" class="btn btn-secondary">Edit My Letter</button>
+                        <button id="confirm-btn" class="btn">Send to Santa! 🎅</button>
+                    </div>
+                </div>
+                
+                <div class="merry-christmas">Merry Christmas! 🎄</div>
+            </div>
+            
+            <!-- Admin Section -->
+            <div id="admin-section" class="form-section">
+                <button id="admin-back-btn" class="back-button">← Back</button>
+                
+                <div class="form-group">
+                    <label for="admin-password">Elf Password:</label>
+                    <input type="password" id="admin-password" placeholder="Enter elf password">
+                    <button id="login-btn" class="btn" style="margin-top: 10px;">Enter Santa's Workshop</button>
+                </div>
+                
+                <div id="admin-content" class="hidden">
+                    <h2 style="color: #e01b24;">Santa's Wish List 🎅</h2>
+                    <p style="color: #333;">All the letters sent to Santa from good children:</p>
+                    <div class="participant-list" id="admin-participant-list">
+                        <!-- Daftar peserta akan ditampilkan di sini -->
+                    </div>
+                    <div class="action-buttons">
+                        <button id="back-btn" class="btn btn-secondary">Back to Letter</button>
+                        <button id="clear-data-btn" class="btn">Clear All Letters</button>
+                        <button id="download-excel-btn" class="btn">Download Excel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification"></div>
+
+    <script>
+        // URL Google Apps Script
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyLhJXEIh_vSodfBrqMfwneBj84lPnfgGQ5CdLq8fTeV8Z0cTMDtIEVn4nipMBF3FnnFg/exec';
+        
+        // Data peserta
+        let participants = [];
+        
+        // Elemen DOM
+        const formSection = document.getElementById('form-section');
+        const adminSection = document.getElementById('admin-section');
+        const nameInput = document.getElementById('name');
+        const link1Input = document.getElementById('link1');
+        const link2Input = document.getElementById('link2');
+        const link3Input = document.getElementById('link3');
+        const submitBtn = document.getElementById('submit-btn');
+        const confirmation = document.getElementById('confirmation');
+        const confirmationData = document.getElementById('confirmation-data');
+        const editBtn = document.getElementById('edit-btn');
+        const confirmBtn = document.getElementById('confirm-btn');
+        const adminBtn = document.getElementById('admin-btn');
+        const adminBackBtn = document.getElementById('admin-back-btn');
+        const adminPasswordInput = document.getElementById('admin-password');
+        const loginBtn = document.getElementById('login-btn');
+        const adminContent = document.getElementById('admin-content');
+        const adminParticipantList = document.getElementById('admin-participant-list');
+        const backBtn = document.getElementById('back-btn');
+        const clearDataBtn = document.getElementById('clear-data-btn');
+        const downloadExcelBtn = document.getElementById('download-excel-btn');
+        const notification = document.getElementById('notification');
+        const snowContainer = document.getElementById('snow-container');
+        const lightsContainer = document.getElementById('lights-container');
+        const headerLights = document.getElementById('header-lights');
+        
+        // Opsi kehadiran
+        const attendanceOptions = document.querySelectorAll('.attendance-option');
+        let selectedAttendance = '';
+        
+        // Event listener untuk opsi kehadiran
+        attendanceOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                // Hapus kelas selected dari semua opsi
+                attendanceOptions.forEach(opt => opt.classList.remove('selected'));
+                
+                // Tambah kelas selected ke opsi yang diklik
+                this.classList.add('selected');
+                
+                // Set radio button yang sesuai
+                const radio = this.querySelector('input[type="radio"]');
+                radio.checked = true;
+                selectedAttendance = radio.value;
+            });
+        });
+        
+        // Buat efek salju
+        function createSnow() {
+            const snowflakes = ['❄', '⛄', '🎄', '🌟', '❅', '❆'];
+            
+            for (let i = 0; i < 80; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.classList.add('snowflake');
+                snowflake.innerHTML = snowflakes[Math.floor(Math.random() * snowflakes.length)];
+                snowflake.style.left = Math.random() * 100 + 'vw';
+                snowflake.style.animationDuration = Math.random() * 5 + 5 + 's';
+                snowflake.style.opacity = Math.random();
+                snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
+                snowContainer.appendChild(snowflake);
+            }
+        }
+        
+        // Buat lampu natal
+        function createLights() {
+            const colors = ['#ff0000', '#32a852', '#ffff00', '#ff00ff', '#00ffff', '#ffffff'];
+            
+            for (let i = 0; i < 25; i++) {
+                const light = document.createElement('div');
+                light.classList.add('christmas-light');
+                light.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                light.style.left = Math.random() * 100 + 'vw';
+                light.style.top = Math.random() * 100 + 'vh';
+                light.style.animationDelay = Math.random() * 2 + 's';
+                lightsContainer.appendChild(light);
+            }
+        }
+        
+        // Buat lampu header
+        function createHeaderLights() {
+            const colors = ['#ff0000', '#32a852', '#ffff00', '#ff00ff', '#00ffff', '#ffffff'];
+            
+            for (let i = 0; i < 12; i++) {
+                const light = document.createElement('div');
+                light.classList.add('header-light');
+                light.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                light.style.animationDelay = (i * 0.2) + 's';
+                headerLights.appendChild(light);
+            }
+        }
+        
+        // Tampilkan notifikasi
+        function showNotification(message, type = 'success') {
+            notification.textContent = message;
+            notification.className = 'notification ' + type;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+        
+        // Fungsi untuk mengambil data dari Google Apps Script
+        async function fetchData() {
+            try {
+                console.log('Fetching data from Google Apps Script...');
+                
+                const url = `${SCRIPT_URL}?action=getData&t=${Date.now()}`;
+                const response = await fetch(url);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                console.log('Data received from Google Sheets:', data);
+                
+                return data;
+                
+            } catch (error) {
+                console.error('Error fetching data from Google Apps Script:', error);
+                
+                // Fallback ke localStorage
+                const localData = localStorage.getItem('santaWishList');
+                if (localData) {
+                    console.log('Using local storage data as fallback');
+                    return JSON.parse(localData);
+                }
+                
+                console.log('No data available, returning empty array');
+                return [];
+            }
+        }
+        
+        // Fungsi untuk menyimpan data ke Google Apps Script
+        async function saveData(participant) {
+            try {
+                console.log('Saving data to Google Apps Script...', participant);
+                
+                // Gunakan URL parameters untuk menghindari CORS issues
+                const params = new URLSearchParams({
+                    action: 'addData',
+                    name: participant.name,
+                    attendance: participant.attendance,
+                    links: JSON.stringify(participant.links),
+                    timestamp: participant.timestamp
+                });
+                
+                const url = `${SCRIPT_URL}?${params.toString()}`;
+                
+                const response = await fetch(url, {
+                    method: 'GET'
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const result = await response.json();
+                console.log('Save result from Google Apps Script:', result);
+                
+                if (result.status === 'success') {
+                    return { 
+                        success: true, 
+                        message: 'Data saved to Google Sheets! 🎅' 
+                    };
+                } else {
+                    throw new Error(result.message || 'Unknown error from server');
+                }
+                
+            } catch (error) {
+                console.error('Error saving data to Google Apps Script:', error);
+                
+                // Fallback: simpan ke localStorage saja
+                const localData = localStorage.getItem('santaWishList');
+                let localParticipants = localData ? JSON.parse(localData) : [];
+                localParticipants.push(participant);
+                localStorage.setItem('santaWishList', JSON.stringify(localParticipants));
+                
+                return { 
+                    success: true, 
+                    message: 'Data saved locally (Google Apps Script unavailable: ' + error.message + ')' 
+                };
+            }
+        }
+        
+        // Fungsi untuk membuat hyperlink
+        function createGiftLink(link) {
+            // Jika link kosong, kembalikan string kosong
+            if (!link) return '';
+            
+            // Cek apakah link sudah memiliki protokol
+            let href = link;
+            if (!href.startsWith('http://') && !href.startsWith('https://')) {
+                href = 'https://' + href;
+            }
+            
+            return `<a href="${href}" target="_blank" class="gift-link">${link}</a>`;
+        }
+        
+        // Submit data
+        submitBtn.addEventListener('click', function() {
+            const name = nameInput.value.trim();
+            const links = [
+                link1Input.value.trim(),
+                link2Input.value.trim(),
+                link3Input.value.trim()
+            ].filter(link => link !== '');
+            
+            if (name === '') {
+                showNotification('Please tell Santa your name!', 'error');
+                return;
+            }
+            
+            if (selectedAttendance === '') {
+                showNotification('Please select your attendance option!', 'error');
+                return;
+            }
+            
+            // Tampilkan konfirmasi
+            let attendanceText = '';
+            switch(selectedAttendance) {
+                case 'by myself':
+                    attendanceText = 'I will come by myself';
+                    break;
+                case '+1':
+                    attendanceText = 'I will come with +1 person';
+                    break;
+                case '+2':
+                    attendanceText = 'I will come with +2 people';
+                    break;
+                case '+3':
+                    attendanceText = 'I will come with +3 people';
+                    break;
+                case '++++':
+                    attendanceText = 'I will come with a big group!';
+                    break;
+            }
+            
+            confirmationData.innerHTML = `
+                <div class="confirmation-item">
+                    <div class="wish-text">Dear Santa, my name is <span class="confirmation-name">${name}</span>.</div>
+                    <div class="confirmation-attendance">${attendanceText}</div>
+                    <div class="wish-text">Santa, please bring me:</div>
+                    <ul class="confirmation-links">
+                        ${links.length > 0 ? 
+                          links.map(link => `<li>${createGiftLink(link)}</li>`).join('') : 
+                          '<li>I would be happy with any gift you choose!</li>'}
+                    </ul>
+                    <div class="wish-text">I've been good this year.</div>
+                    <div class="merry-christmas">Merry Christmas! 🎄</div>
+                </div>
+            `;
+            
+            confirmation.classList.remove('hidden');
+            submitBtn.disabled = true;
+        });
+        
+        // Edit data
+        editBtn.addEventListener('click', function() {
+            confirmation.classList.add('hidden');
+            submitBtn.disabled = false;
+        });
+        
+        // Konfirmasi dan simpan data
+        confirmBtn.addEventListener('click', async function() {
+            const name = nameInput.value.trim();
+            const links = [
+                link1Input.value.trim(),
+                link2Input.value.trim(),
+                link3Input.value.trim()
+            ].filter(link => link !== '');
+            
+            // Tampilkan loading
+            const originalText = confirmBtn.innerHTML;
+            confirmBtn.innerHTML = '<span class="loading"></span>Sending to Santa...';
+            confirmBtn.disabled = true;
+            
+            try {
+                // Buat objek peserta
+                const participant = {
+                    name: name,
+                    attendance: selectedAttendance,
+                    links: links,
+                    timestamp: new Date().toISOString()
+                };
+                
+                // Simpan ke Google Apps Script
+                const result = await saveData(participant);
+                
+                // Reset form
+                nameInput.value = '';
+                link1Input.value = '';
+                link2Input.value = '';
+                link3Input.value = '';
+                attendanceOptions.forEach(opt => {
+                    opt.classList.remove('selected');
+                    opt.querySelector('input[type="radio"]').checked = false;
+                });
+                selectedAttendance = '';
+                
+                // Sembunyikan konfirmasi
+                confirmation.classList.add('hidden');
+                submitBtn.disabled = false;
+                
+                // Tampilkan notifikasi dengan pesan dari server
+                showNotification(result.message, 'success');
+                
+            } catch (error) {
+                console.error('Error in confirmation:', error);
+                showNotification('Failed to send letter: ' + error.message, 'error');
+            } finally {
+                // Reset tombol
+                confirmBtn.innerHTML = originalText;
+                confirmBtn.disabled = false;
+            }
+        });
+        
+        // Buka halaman admin
+        adminBtn.addEventListener('click', function() {
+            formSection.classList.remove('active');
+            adminSection.classList.add('active');
+            adminContent.classList.add('hidden');
+            adminPasswordInput.value = '';
+        });
+        
+        // Kembali dari halaman admin
+        adminBackBtn.addEventListener('click', function() {
+            adminSection.classList.remove('active');
+            formSection.classList.add('active');
+        });
+        
+        // Login admin
+        loginBtn.addEventListener('click', async function() {
+            const password = adminPasswordInput.value.trim();
+            
+            // Password sederhana
+            if (password === 'elf123') {
+                // Tampilkan loading
+                const originalText = loginBtn.innerHTML;
+                loginBtn.innerHTML = '<span class="loading"></span>Loading...';
+                loginBtn.disabled = true;
+                
+                try {
+                    // Ambil data dari Google Apps Script
+                    participants = await fetchData();
+                    console.log('Participants loaded from Google Sheets:', participants);
+                    
+                    // Tampilkan konten admin
+                    adminContent.classList.remove('hidden');
+                    updateAdminParticipantList();
+                    
+                    showNotification(`Loaded ${participants.length} letters from Santa's workshop!`, 'success');
+                    
+                } catch (error) {
+                    console.error('Error loading admin data:', error);
+                    showNotification('Error loading data: ' + error.message, 'error');
+                } finally {
+                    // Reset tombol
+                    loginBtn.innerHTML = originalText;
+                    loginBtn.disabled = false;
+                }
+            } else {
+                showNotification('Wrong elf password!', 'error');
+            }
+        });
+        
+        // Update daftar peserta di admin
+        function updateAdminParticipantList() {
+            adminParticipantList.innerHTML = '';
+            
+            if (participants.length === 0) {
+                adminParticipantList.innerHTML = '<p style="text-align: center; color: #e01b24;">No letters to Santa yet!</p>';
+                return;
+            }
+            
+            // Urutkan berdasarkan timestamp (terbaru pertama)
+            const sortedParticipants = [...participants].sort((a, b) => 
+                new Date(b.timestamp) - new Date(a.timestamp)
+            );
+            
+            sortedParticipants.forEach((participant, index) => {
+                const participantItem = document.createElement('div');
+                participantItem.className = 'participant-item';
+                
+                const nameDiv = document.createElement('div');
+                nameDiv.className = 'participant-name';
+                nameDiv.textContent = 'From: ' + participant.name;
+                
+                const timestampDiv = document.createElement('div');
+                timestampDiv.style.fontSize = '12px';
+                timestampDiv.style.color = '#e01b24';
+                timestampDiv.textContent = 'Sent: ' + new Date(participant.timestamp).toLocaleString();
+                
+                // Tampilkan informasi kehadiran
+                let attendanceText = '';
+                switch(participant.attendance) {
+                    case 'by myself':
+                        attendanceText = 'Will come: By myself';
+                        break;
+                    case '+1':
+                        attendanceText = 'Will come: +1 person';
+                        break;
+                    case '+2':
+                        attendanceText = 'Will come: +2 people';
+                        break;
+                    case '+3':
+                        attendanceText = 'Will come: +3 people';
+                        break;
+                    case '++++':
+                        attendanceText = 'Will come: Big group';
+                        break;
+                }
+                
+                const attendanceDiv = document.createElement('div');
+                attendanceDiv.className = 'participant-attendance';
+                attendanceDiv.textContent = attendanceText;
+                
+                const wishText = document.createElement('div');
+                wishText.className = 'wish-text';
+                wishText.textContent = "Santa, please bring me:";
+                
+                const linksList = document.createElement('ul');
+                linksList.className = 'participant-links';
+                
+                if (participant.links && participant.links.length > 0) {
+                    participant.links.forEach(link => {
+                        const linkItem = document.createElement('li');
+                        linkItem.innerHTML = createGiftLink(link);
+                        linksList.appendChild(linkItem);
+                    });
+                } else {
+                    const noLinks = document.createElement('li');
+                    noLinks.textContent = 'I would be happy with any gift!';
+                    linksList.appendChild(noLinks);
+                }
+                
+                const closingText = document.createElement('div');
+                closingText.className = 'wish-text';
+                closingText.textContent = "I've been good this year. Merry Christmas! 🎄";
+                
+                participantItem.appendChild(nameDiv);
+                participantItem.appendChild(timestampDiv);
+                participantItem.appendChild(attendanceDiv);
+                participantItem.appendChild(wishText);
+                participantItem.appendChild(linksList);
+                participantItem.appendChild(closingText);
+                adminParticipantList.appendChild(participantItem);
+            });
+        }
+        
+        // Kembali ke form input
+        backBtn.addEventListener('click', function() {
+            adminSection.classList.remove('active');
+            formSection.classList.add('active');
+        });
+        
+        // Hapus semua data
+        clearDataBtn.addEventListener('click', function() {
+            if (confirm('Are you sure you want to delete all letters to Santa?')) {
+                participants = [];
+                localStorage.removeItem('santaWishList');
+                updateAdminParticipantList();
+                showNotification('All letters have been cleared from local storage!');
+            }
+        });
+        
+        // Download data dalam format Excel
+        downloadExcelBtn.addEventListener('click', function() {
+            if (participants.length === 0) {
+                showNotification('No data to download!', 'error');
+                return;
+            }
+            
+            // Buat header untuk CSV
+            const headers = ['Name', 'Attendance', 'Gift Links', 'Timestamp'];
+            
+            // Buat data untuk CSV
+            const csvData = participants.map(participant => [
+                participant.name,
+                participant.attendance,
+                participant.links ? participant.links.join('; ') : '',
+                new Date(participant.timestamp).toLocaleString()
+            ]);
+            
+            // Gabungkan header dan data
+            const csvContent = [headers, ...csvData]
+                .map(row => row.map(field => `"${field}"`).join(','))
+                .join('\n');
+            
+            // Buat blob dan trigger download
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.setAttribute('href', url);
+            link.setAttribute('download', 'santa_wishlist.csv');
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            showNotification('Data downloaded as CSV!', 'success');
+        });
+        
+        // Inisialisasi efek visual
+        createSnow();
+        createLights();
+        createHeaderLights();
+        
+        // Load data saat pertama kali dimuat
+        window.addEventListener('DOMContentLoaded', async function() {
+            console.log('Loading initial data...');
+            participants = await fetchData();
+            console.log('Initial data loaded:', participants.length, 'participants');
+        });
+    </script>
+</body>
+</html>
